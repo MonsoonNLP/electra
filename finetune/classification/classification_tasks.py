@@ -437,3 +437,21 @@ class STS(RegressionTask):
       examples += self._load_glue(
           lines, split, -3, -2, -1, True, len(examples), True)
     return examples
+
+class XNLI(ClassificationTask):
+  """XNLI."""
+
+  def __init__(self, config: configure_finetuning.FinetuningConfig, tokenizer):
+    super(XNLI, self).__init__(config, "xnli", tokenizer,
+                               ["contradictory", "entailment", "neutral"])
+
+  def get_examples(self, split):
+    return self._create_examples(read_tsv(
+        os.path.join(self.config.raw_data_dir(self.name), split + ".tsv"),
+        max_lines=100 if self.config.debug else None), split)
+
+  def _create_examples(self, lines, split):
+    if split != "train":
+      return self._load_glue(lines, split, 6, 7, 1, skip_first_line=True)
+    else:
+      return self._load_glue(lines, split, 0, 1, 2, skip_first_line=True)
