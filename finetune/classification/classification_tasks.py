@@ -443,7 +443,7 @@ class XNLI(ClassificationTask):
 
   def __init__(self, config: configure_finetuning.FinetuningConfig, tokenizer):
     super(XNLI, self).__init__(config, "xnli", tokenizer,
-                               ["contradictory", "entailment", "neutral"])
+                               ["contradiction", "entailment", "neutral"])
 
   def get_examples(self, split):
     return self._create_examples(read_tsv(
@@ -454,4 +454,4 @@ class XNLI(ClassificationTask):
     if split != "train":
       return self._load_glue(lines, split, 6, 7, 1, skip_first_line=True)
     else:
-      return self._load_glue(lines, split, 0, 1, 2, skip_first_line=True)
+      return self._load_glue(lines, split, 8, 9, -1, skip_first_line=True)
