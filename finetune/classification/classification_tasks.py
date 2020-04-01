@@ -467,4 +467,4 @@ class Movies(ClassificationTask):
         max_lines=100 if self.config.debug else None), split)
 
   def _create_examples(self, lines, split):
-    return self._load_glue(lines, split, 0, None, 1, skip_first_line=True)
+    return self._load_glue(lines, split, 1, None, 2, skip_first_line=True)
