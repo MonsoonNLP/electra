@@ -56,6 +56,8 @@ def get_task(config: configure_finetuning.FinetuningConfig, task_name,
     return classification_tasks.XNLI(config, tokenizer)
   elif task_name == "movies":
     return classification_tasks.Movies(config, tokenizer)
+  elif task_name == "bbc":
+    return classification_tasks.BBC(config, tokenizer)
   elif task_name == "squad":
     return qa_tasks.SQuAD(config, tokenizer)
   elif task_name == "squadv1":

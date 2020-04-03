@@ -468,3 +468,16 @@ class Movies(ClassificationTask):
 
   def _create_examples(self, lines, split):
     return self._load_glue(lines, split, 1, None, 2, skip_first_line=True)
+
+class BBC(ClassificationTask):
+  def __init__(self, config: configure_finetuning.FinetuningConfig, tokenizer):
+    super(BBC, self).__init__(config, "bbc", tokenizer,
+                               ['southasia', 'international', 'learningenglish', 'institutional', 'india', 'news', 'pakistan', 'multimedia', 'social', 'china', 'entertainment', 'science', 'business', 'sport'])
+
+  def get_examples(self, split):
+    return self._create_examples(read_tsv(
+        os.path.join(self.config.raw_data_dir(self.name), split + ".csv"),
+        max_lines=100 if self.config.debug else None), split)
+
+  def _create_examples(self, lines, split):
+    return self._load_glue(lines, split, 1, None, 0, skip_first_line=True)
