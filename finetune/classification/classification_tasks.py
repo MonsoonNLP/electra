@@ -464,6 +464,7 @@ class Movies(ClassificationTask):
   def get_examples(self, split):
     return self._create_examples(read_tsv(
         os.path.join(self.config.raw_data_dir(self.name), split + ".tsv"),
+        quotechar="\"",
         max_lines=100 if self.config.debug else None), split)
 
   def _create_examples(self, lines, split):
@@ -477,6 +478,7 @@ class BBC(ClassificationTask):
   def get_examples(self, split):
     return self._create_examples(read_tsv(
         os.path.join(self.config.raw_data_dir(self.name), split + ".csv"),
+        quotechar="\"",
         max_lines=100 if self.config.debug else None), split)
 
   def _create_examples(self, lines, split):
