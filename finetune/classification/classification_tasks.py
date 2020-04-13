@@ -459,7 +459,7 @@ class XNLI(ClassificationTask):
 class Movies(ClassificationTask):
   def __init__(self, config: configure_finetuning.FinetuningConfig, tokenizer):
     super(Movies, self).__init__(config, "movies", tokenizer,
-                               ["0", "1", "2"])
+                               ["negative", "neutral", "positive", ""])
 
   def get_examples(self, split):
     return self._create_examples(read_tsv(
